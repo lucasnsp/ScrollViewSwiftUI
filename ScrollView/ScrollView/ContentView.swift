@@ -10,10 +10,26 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            ScrollView {
+                VStack(spacing: 15.0){
+                    ForEach(0..<26) { index in
+                        Text("Posição -> \(index)")
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 45)
+                            .background(Color.green)
+                    }
+                }
+            }
+            
+            ScrollView(.horizontal) {
+                HStack(spacing: 15.0){
+                    ForEach(0..<26) { index in
+                        Text("Posição -> \(index)")
+                            .frame(height: 45)
+                            .background(Color.blue)
+                    }
+                }
+            }
         }
         .padding()
     }
