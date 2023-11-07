@@ -10,8 +10,8 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            ScrollView {
-                VStack(spacing: 15.0){
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVStack(spacing: 15.0){
                     ForEach(0..<26) { index in
                         Text("Posição -> \(index)")
                             .frame(maxWidth: .infinity)
@@ -21,15 +21,15 @@ struct ContentView: View {
                 }
             }
             
-            ScrollView(.horizontal) {
-                HStack(spacing: 15.0){
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 15.0){
                     ForEach(0..<26) { index in
                         Text("Posição -> \(index)")
                             .frame(height: 45)
                             .background(Color.blue)
                     }
                 }
-            }
+            }.frame(height: 60)
         }
         .padding()
     }
