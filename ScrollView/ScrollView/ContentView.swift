@@ -7,7 +7,22 @@
 
 import SwiftUI
 
+struct Person: Identifiable {
+    let id = UUID()
+    let name: String
+    let age: Int
+}
+
 struct ContentView: View {
+    
+    @State var selectedPosition: UUID? = nil
+    
+    var list: [Person] = [
+        Person(name: "Caio", age: 21),
+        Person(name: "Felipe", age: 33),
+        Person(name: "Lucas", age: 26),
+    ]
+    
     var body: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
@@ -22,19 +37,31 @@ struct ContentView: View {
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 15.0){
-                    ForEach(0..<26) { index in
-                        Text("Posição -> \(index)")
+                LazyHStack(spacing: 15.0) {
+                    //                    ForEach(0..<26) { index in
+                    //                        Text("Posição -> \(index)")
+                    //                            .frame(height: 45)
+                    //                            .background(selectedPosition == index ? Color.red : Color.blue)
+                    //                            .onTapGesture {
+                    //                                print("Clicou na posição \(index)")
+                    //                                selectedPosition = index
+                    //                            }
+                    //                    }
+                    ForEach(list) { person in
+                        Text("Nome -> \(person.name)")
                             .frame(height: 45)
-                            .background(Color.blue)
+                            .background(selectedPosition == person.id ? Color.red : Color.blue)
+                            .onTapGesture {
+                                print("Clicou no nome: \(person.name)")
+                                selectedPosition = person.id
+                            }
+                        }
                     }
-                }
-            }.frame(height: 60)
+                }.frame(height: 60)
+            }
+            .padding()
         }
-        .padding()
     }
-}
-
 #Preview {
     ContentView()
 }
